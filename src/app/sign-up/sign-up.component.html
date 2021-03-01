@@ -1,16 +1,73 @@
 <div class="container">
-<form>
-    
-        <input type="email" placeholder="Email"/>
-        <br>
-        
-        <input type="password" placeholder="Password"/>
-        <br>
-    
-        <input type="password" placeholder="Confirm Password"/>
-        <br>
-        <button type="submit" class="btn">Sign Up</button>
-    
+  <form>
+    <h1>Sign Up</h1>
+    <input
+      id="email"
+      name="email"
+      [class.invalid]="email.invalid && email.touched"
+      class="input"
+      type="email"
+      placeholder="Email"
+      pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+      required
+      [(ngModel)]="mail"
+      #email="ngModel"
+    />
+    <div *ngIf="email.errors && (email.dirty || email.touched)">
+      <small *ngIf="email.errors.required">Email is required.</small>
+      <small *ngIf="email.errors?.pattern"
+        >Please provide a valid email address.</small
+      >
+    </div>
 
-</form>
+    <br />
+    <input
+      id="pass"
+      name="pass"
+      [class.invalid]="pass.invalid && pass.touched"
+      class="input"
+      type="password"
+      placeholder="Password"
+      pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+      required
+      [(ngModel)]="password"
+      #pass="ngModel"
+    />
+    <div *ngIf="pass.errors && (pass.dirty || pass.touched)">
+      <small *ngIf="pass.errors.pattern"
+        >Must contain at least one number and one uppercase and lowercase
+        letter, and at least 8 or more characters.</small
+      >
+      <small *ngIf="pass.errors.required">Password is required</small>
+    </div>
+
+    <br />
+    <input
+      id="cpass"
+      name="cpass"
+      [class.invalid]="cpass.invalid && cpass.touched"
+      class="input"
+      type="password"
+      placeholder="Confirm Password"
+      pattern="{{ pass.value }}"
+      required
+      [(ngModel)]="cpassword"
+      #cpass="ngModel"
+    />
+    <div *ngIf="cpass.errors && (cpass.dirty || cpass.touched)">
+      <small *ngIf="cpass.errors.pattern"
+        >Password & Confirm Password does not match</small
+      >
+      <small *ngIf="cpass.errors.required">Confirm password is required</small>
+    </div>
+    <br />
+    <button
+      [disabled]="email.invalid || pass.invalid || cpass.invalid"
+      class="input btn"
+      type="submit"
+      (click)="signUpButtonHandler($event)"
+    >
+      Sign Up
+    </button>
+  </form>
 </div>

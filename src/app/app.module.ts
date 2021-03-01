@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {RouterModule} from '@angular/router';
-
+import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
@@ -15,19 +15,20 @@ import { HomeComponent } from './home/home.component';
     SignInComponent,
     SignUpComponent,
     DashboardComponent,
-    HomeComponent
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     RouterModule.forRoot([
-      {path:'sign-in',component:SignInComponent},
-      {path:'sign-up',component:SignUpComponent},
-      {path:'dashboard',component:DashboardComponent},
-      {path:'',component:HomeComponent},
-      {path:'**',component:PageNotFoundComponent},
-    ])
+      { path: 'sign-in', component: SignInComponent },
+      { path: 'sign-up', component: SignUpComponent },
+      { path: 'dashboard', component: DashboardComponent },
+      { path: '', component: HomeComponent },
+      { path: '**', component: PageNotFoundComponent },
+    ]),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,12 +1,19 @@
 <div class="container">
-<form>
+  <form>
+    <h1>Sign In</h1>
+    <input class="input" type="email" placeholder="Email" required />
+    <br />
+    <input
+      class="input"
+      type="password"
+      placeholder="Password"
+      required
+      minlength="6"
+    />
 
-
-            <input type="email" placeholder="Email"/>
-            <br>
-                <input type="password" placeholder="Password"/>
-            <br>
-        
-        <button type="submit" class="btn">Sign In</button>
-    </form>
+    <br />
+    <button class="input btn" type="submit" onclick="signInButtonHandler">
+      Sign In
+    </button>
+  </form>
 </div>
