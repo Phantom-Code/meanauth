@@ -30,3 +30,6 @@ form {
   width: 105%;
   border: 0;
 }
+.invalid {
+  border-color: red;
+}

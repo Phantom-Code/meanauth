@@ -1,18 +1,41 @@
 <div class="container">
-  <form>
+  <form #signInForm="ngForm" (ngSubmit)="signInButtonHandler()">
     <h1>Sign In</h1>
-    <input class="input" type="email" placeholder="Email" required />
+    <input
+      id="mail"
+      name="mail"
+      [class.invalid]="mail.invalid && mail.touched"
+      class="input"
+      type="email"
+      placeholder="Email"
+      required
+      pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+      [(ngModel)]="userEmail"
+      #mail="ngModel"
+    />
+    <div *ngIf="mail.errors && (mail.dirty || mail.touched)">
+      <small *ngIf="mail.errors?.pattern"
+        >Please provide a valid email address.</small
+      >
+      <small *ngIf="mail.errors.required">Email is required.</small>
+    </div>
     <br />
     <input
+      id="passw"
+      name="passw"
+      [class.invalid]="pass.invalid && pass.touched"
       class="input"
       type="password"
       placeholder="Password"
       required
-      minlength="6"
+      [(ngModel)]="password"
+      #pass="ngModel"
     />
-
+    <div *ngIf="pass.errors && (pass.dirty || pass.touched)">
+      <small *ngIf="pass.errors.required"> Password is required. </small>
+    </div>
     <br />
-    <button class="input btn" type="submit" onclick="signInButtonHandler">
+    <button [disabled]="!signInForm.form.valid" class="input btn" type="submit">
       Sign In
     </button>
   </form>

@@ -1,7 +1,34 @@
 <div class="nav">
-    <a class="navleft" routerLink="/" routerLinkActive="activepage" [routerLinkActiveOptions]="{exact: true}">Home</a>
-    <a class="navright" routerLink="/sign-in" routerLinkActive="activepage">Sign In</a>
-    <a class="navright" routerLink="/sign-up" routerLinkActive="activepage">Sign Up</a>
-    <a class="navright" routerLink="/dashbaord" routerLinkActive="activepage">Dashboard</a>
+  <a
+    class="navleft"
+    routerLink="/"
+    routerLinkActive="activepage"
+    [routerLinkActiveOptions]="{ exact: true }"
+    >Home</a
+  >
+  <a
+    *ngIf="!auth.loggedIn()"
+    class="navright"
+    routerLink="/sign-in"
+    routerLinkActive="activepage"
+    >Sign In</a
+  >
+  <a
+    *ngIf="!auth.loggedIn()"
+    class="navright"
+    routerLink="/sign-up"
+    routerLinkActive="activepage"
+    >Sign Up</a
+  >
+  <a
+    *ngIf="auth.loggedIn()"
+    class="navright"
+    routerLink="/dashboard"
+    routerLinkActive="activepage"
+    >Dashboard</a
+  >
+  <a *ngIf="auth.loggedIn()" class="navright" (click)="auth.signOut()"
+    >Logout</a
+  >
 </div>
 <router-outlet></router-outlet>

@@ -1,6 +1,21 @@
 <div class="container">
-  <form>
+  <form #signUpForm="ngForm" (ngSubmit)="signUpFormSubmitHandler(signUpForm)">
     <h1>Sign Up</h1>
+    <input
+      id="uname"
+      name="uname"
+      [class.invalid]="uname.invalid && uname.touched"
+      class="input"
+      type="text"
+      placeholder="name"
+      required
+      [(ngModel)]="username"
+      #uname="ngModel"
+    />
+    <div *ngIf="uname.errors && (uname.dirty || uname.touched)">
+      <small *ngIf="uname.errors.required">Name is required.</small>
+    </div>
+    <br />
     <input
       id="email"
       name="email"
@@ -60,13 +75,9 @@
       >
       <small *ngIf="cpass.errors.required">Confirm password is required</small>
     </div>
+
     <br />
-    <button
-      [disabled]="email.invalid || pass.invalid || cpass.invalid"
-      class="input btn"
-      type="submit"
-      (click)="signUpButtonHandler($event)"
-    >
+    <button [disabled]="!signUpForm.form.valid" class="input btn" type="submit">
       Sign Up
     </button>
   </form>
